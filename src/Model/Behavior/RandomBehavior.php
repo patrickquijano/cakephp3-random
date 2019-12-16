@@ -1,11 +1,14 @@
 <?php
 
-namespace Random\Controller\Component;
+namespace App\Model\Behavior;
 
-use Cake\Controller\Component;
+use Cake\ORM\Behavior;
 use RandomLib\Factory;
 
-class RandomComponent extends Component {
+/**
+ * Random behavior
+ */
+class RandomBehavior extends Behavior {
 
     /**
      * @var \RandomLib\Factory
