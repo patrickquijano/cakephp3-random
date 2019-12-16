@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Model\Behavior;
+namespace Random\Model\Behavior;
 
 use Cake\ORM\Behavior;
 use RandomLib\Factory;
 
-/**
- * Random behavior
- */
 class RandomBehavior extends Behavior {
 
     /**
