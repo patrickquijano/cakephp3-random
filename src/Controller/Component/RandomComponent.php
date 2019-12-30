@@ -5,45 +5,56 @@ namespace Random\Controller\Component;
 use Cake\Controller\Component;
 use RandomLib\Factory;
 
+/**
+ * Component for generating random string.
+ */
 class RandomComponent extends Component {
 
     /**
-     * @var \RandomLib\Factory
-     */
-    private $_factory;
-
-    /**
+     * Default config
+     *
      * @var array
      */
     protected $_defaultConfig = [
         'upper' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
         'lower' => 'abcdefghijklmnopqrstuvwxyz',
         'digit' => '0123456789',
+        'special' => '~!@#$%^&*()_+-={}[]',
     ];
 
     /**
-     * @param array $config
-     * @return void
-     */
-    public function initialize(array $config) {
-        parent::initialize($config);
-        $this->_factory = new Factory();
-    }
-
-    /**
+     * Generates random string that is good for token use.
+     *
      * @param int $length
+     * @return string
      */
     public function generateToken($length = 40) {
         $characters = $this->getConfig('upper') . $this->getConfig('lower') . $this->getConfig('digit');
-        return $this->_factory->getMediumStrengthGenerator()->generateString($length, $characters);
+        $factory = new Factory();
+        return $factory->getMediumStrengthGenerator()->generateString($length, $characters);
     }
 
     /**
+     * Generates random string that contains numbers only.
+     *
      * @param int $length
+     * @return string
      */
     public function generateNumbers($length = 30) {
-        $characters = $this->getConfig('digit');
-        return $this->_factory->getMediumStrengthGenerator()->generateString($length, $characters);
+        $factory = new Factory();
+        return $factory->getMediumStrengthGenerator()->generateString($length, $this->getConfig('digit'));
+    }
+
+    /**
+     * Generates random string that is good for password use.
+     *
+     * @param int $length
+     * @return string
+     */
+    public function generatePassword($length = 20) {
+        $characters = $this->getConfig('upper') . $this->getConfig('lower') . $this->getConfig('digit') . $this->getConfig('special');
+        $factory = new Factory();
+        return $factory->getMediumStrengthGenerator()->generateString($length, $characters);
     }
 
 }
